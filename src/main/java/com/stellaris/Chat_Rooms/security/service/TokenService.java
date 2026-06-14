@@ -1,6 +1,7 @@
 package com.stellaris.Chat_Rooms.security.service;
 
 import com.stellaris.Chat_Rooms.domain.enums.Role;
+import com.stellaris.Chat_Rooms.http.exceptions.TokenNotFoundException;
 import com.stellaris.Chat_Rooms.persistence.entities.TokenEntity;
 import com.stellaris.Chat_Rooms.persistence.entities.UserEntity;
 import com.stellaris.Chat_Rooms.persistence.repositories.TokenRepository;
@@ -53,12 +54,13 @@ public class TokenService {
 
     public boolean isValidToken(String token) {
         Date expiration = extractClaims(token, Claims::getExpiration);
-        return (expiration.after(new Date(System.currentTimeMillis())) && this.findUserByToken(token));
+        this.findUserByToken(token);
+        return (expiration.after(new Date(System.currentTimeMillis())));
     }
 
-    private boolean findUserByToken(String token) {
+    private void findUserByToken(String token) {
         UUID userId = this.extractUserId(token);
-        return tokenRepository.findByUserId(userId).isPresent();
+        tokenRepository.findByUserId(userId).orElseThrow(TokenNotFoundException::new);
     }
 
     public String extractUsername(String token) {
