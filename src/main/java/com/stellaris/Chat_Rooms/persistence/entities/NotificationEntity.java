@@ -28,6 +28,6 @@ public class NotificationEntity {
     private LocalDateTime createdAt = LocalDateTime.now();
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
-    private UserEntity user;
+    @JoinColumn(name = "room_id")
+    private RoomEntity room;
 }

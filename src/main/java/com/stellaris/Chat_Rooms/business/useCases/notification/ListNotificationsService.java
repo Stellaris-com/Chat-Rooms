@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -15,8 +16,8 @@ public class ListNotificationsService {
     private final NotificationRepository notificationRepository;
     private final NotificationMapper notificationMapper;
 
-    public List<NotificationResponseDTO> list(UserEntity currentUser) {
-        return notificationRepository.findAllByUserId(currentUser.getId())
+    public List<NotificationResponseDTO> list(UserEntity currentUser, UUID roomId) {
+        return notificationRepository.findAllByUserIdAndRoomId(currentUser.getId(), roomId)
                 .stream()
                 .map(notificationMapper::map)
                 .toList();

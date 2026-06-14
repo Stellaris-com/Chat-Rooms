@@ -2,18 +2,20 @@ package com.stellaris.Chat_Rooms.business.helpers.notification;
 
 import com.stellaris.Chat_Rooms.persistence.entities.NotificationEntity;
 import com.stellaris.Chat_Rooms.persistence.entities.NotificationRepository;
+import com.stellaris.Chat_Rooms.persistence.entities.RoomEntity;
 import com.stellaris.Chat_Rooms.persistence.entities.UserEntity;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-@Service
+@Component
 @RequiredArgsConstructor
-public class RegisterNotificationService {
+public class RegisterNotificationHelper {
     private final NotificationRepository notificationRepository;
 
-    public NotificationEntity register(UserEntity currentUser, String message) {
+    public NotificationEntity register(RoomEntity room, String message) {
         NotificationEntity notification = NotificationEntity.builder()
-                .user(currentUser)
+                .room(room)
                 .message(message)
                 .build();
         return notificationRepository.save(notification);

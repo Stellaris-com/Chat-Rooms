@@ -1,6 +1,6 @@
 package com.stellaris.Chat_Rooms.business.useCases.notification;
 
-import com.stellaris.Chat_Rooms.business.helpers.notification.RegisterNotificationService;
+import com.stellaris.Chat_Rooms.business.helpers.notification.RegisterNotificationHelper;
 import com.stellaris.Chat_Rooms.persistence.entities.NotificationRepository;
 import com.stellaris.Chat_Rooms.persistence.entities.RoomEntity;
 import com.stellaris.Chat_Rooms.persistence.entities.UserEntity;
@@ -16,7 +16,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class RegisterFirstUserMessage {
     private final NotificationRepository notificationRepository;
-    private final RegisterNotificationService registerNotificationService;
+    private final RegisterNotificationHelper registerNotificationHelper;
     private final MessageRepository messageRepository;
     private final RoomRepository roomRepository;
 
@@ -25,7 +25,7 @@ public class RegisterFirstUserMessage {
         if (existingRoom.isEmpty() && this.userIsSendMessages(currentUser.getId(), roomId)) return;
 
         RoomEntity roomFound = existingRoom.get();
-        registerNotificationService.register(currentUser, currentUser.getUsername() + " enviou sua primeira mensagem para sala " + roomFound.getName());
+        registerNotificationHelper.register(roomFound, currentUser.getUsername() + " enviou sua primeira mensagem para sala " + roomFound.getName());
     }
 
     private Optional<RoomEntity> userNotIsAMemberOfRoom(UUID userId, UUID roomId) {

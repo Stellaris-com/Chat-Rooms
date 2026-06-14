@@ -10,8 +10,11 @@ import java.util.UUID;
 public interface NotificationRepository extends JpaRepository<NotificationEntity, UUID> {
     @Query("""
         SELECT n FROM NotificationEntity n
-        INNER JOIN n.user u
+        INNER JOIN n.room r
+        INNER JOIN r.membersOfRoom mr
+        INNER JOIN mr.user u
         WHERE u.id = :userId
+        AND r.id = :roomId
     """)
-    List<NotificationEntity> findAllByUserId(@Param("userId") UUID userId);
+    List<NotificationEntity> findAllByUserIdAndRoomId(@Param("userId") UUID userId, @Param("roomId") UUID roomId);
 }
