@@ -1,7 +1,7 @@
 services:
   chat-rabbitmq:
     image: rabbitmq:3.13-management
-    container_name: rota-facil-rabbitmq
+    container_name: chat-rabbitmq
     ports:
       - "5672:5672"   # Porta de dados (AMQP)
       - "15672:15672" # Porta do Painel de Controle (Browser)
@@ -27,4 +27,5 @@ services:
       - chat-db-data:/var/lib/postgresql/data
 
 volumes:
-  auth-db-data:
+  chat-db-data:
+  chat-rabbitmq-data:

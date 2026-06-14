@@ -19,6 +19,7 @@ import java.util.UUID;
 @Table(name = "user_tb")
 public class UserEntity implements UserDetails {
     @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "user_id")
     private UUID id;
 

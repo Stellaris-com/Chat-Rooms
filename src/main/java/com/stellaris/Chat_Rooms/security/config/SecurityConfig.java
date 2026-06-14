@@ -34,6 +34,11 @@ public class SecurityConfig {
                 .httpBasic(HttpBasicConfigurer::disable)
                 .addFilterBefore(authenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(
+                    request -> request
+
+                            .requestMatchers("/auth/register").permitAll()
+                )
                 .build();
     }
 

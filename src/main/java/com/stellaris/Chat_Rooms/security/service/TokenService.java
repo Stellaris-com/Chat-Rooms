@@ -1,6 +1,7 @@
 package com.stellaris.Chat_Rooms.security.service;
 
 import com.stellaris.Chat_Rooms.domain.enums.Role;
+import com.stellaris.Chat_Rooms.persistence.entities.TokenEntity;
 import com.stellaris.Chat_Rooms.persistence.entities.UserEntity;
 import com.stellaris.Chat_Rooms.persistence.repositories.TokenRepository;
 import io.jsonwebtoken.Claims;
@@ -24,7 +25,7 @@ public class TokenService {
     private final PublicKey publicKey;
 
     public String generateAccessToken(UserEntity saved) {
-        return Jwts.builder()
+        String token = Jwts.builder()
                 .subject(saved.getUsername())
                 .claim("userId", saved.getId())
                 .claim("role", saved.getRole())
@@ -32,6 +33,8 @@ public class TokenService {
                 .expiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .signWith(privateKey)
                 .compact();
+        tokenRepository.save(new TokenEntity(null, saved, token));
+        return token;
     }
 
     public UUID extractUserId(String token) {
