@@ -1,6 +1,6 @@
 package com.stellaris.Chat_Rooms.http.controllers;
 
-import com.stellaris.Chat_Rooms.business.user.ViewMeService;
+import com.stellaris.Chat_Rooms.business.useCases.user.ViewMeService;
 import com.stellaris.Chat_Rooms.http.dto.response.user.UserResponseDTO;
 import com.stellaris.Chat_Rooms.persistence.entities.UserEntity;
 import lombok.RequiredArgsConstructor;

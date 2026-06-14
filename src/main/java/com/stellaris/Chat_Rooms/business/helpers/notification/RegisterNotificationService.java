@@ -1,4 +1,4 @@
-package com.stellaris.Chat_Rooms.business.notification;
+package com.stellaris.Chat_Rooms.business.helpers.notification;
 
 import com.stellaris.Chat_Rooms.persistence.entities.NotificationEntity;
 import com.stellaris.Chat_Rooms.persistence.entities.NotificationRepository;

@@ -1,4 +1,4 @@
-package com.stellaris.Chat_Rooms.business.room;
+package com.stellaris.Chat_Rooms.business.useCases.room;
 
 import com.stellaris.Chat_Rooms.domain.enums.TypeOfMember;
 import com.stellaris.Chat_Rooms.http.exceptions.RoomNotFoundException;

@@ -1,8 +1,8 @@
-package com.stellaris.Chat_Rooms.business.room;
+package com.stellaris.Chat_Rooms.business.useCases.room;
 
+import com.stellaris.Chat_Rooms.http.dto.request.room.UpdateRoomRequestDTO;
 import com.stellaris.Chat_Rooms.http.dto.response.room.RoomResponseDTO;
 import com.stellaris.Chat_Rooms.http.exceptions.RoomNotFoundException;
-import com.stellaris.Chat_Rooms.persistence.entities.MembersOfRoomEntity;
 import com.stellaris.Chat_Rooms.persistence.entities.RoomEntity;
 import com.stellaris.Chat_Rooms.persistence.entities.UserEntity;
 import com.stellaris.Chat_Rooms.persistence.mappers.RoomMapper;
@@ -14,16 +14,16 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-public class EnterInRoomService {
+public class UpdateRoomService {
     private final RoomRepository roomRepository;
     private final RoomMapper roomMapper;
 
-    public RoomResponseDTO enter(UserEntity user, UUID roomId) {
-        RoomEntity roomFound = roomRepository.findById(roomId)
+    public RoomResponseDTO update(UserEntity user, UpdateRoomRequestDTO request, UUID roomId) {
+        RoomEntity updateRoom = roomRepository.findByOwnerUserIdAndRoomId(user.getId(), roomId)
                 .orElseThrow(RoomNotFoundException::new);
+        updateRoom.setName(request.name());
 
-        roomFound.getMembersOfRoom().add(MembersOfRoomEntity.buildMemberParticipant(user, roomFound));
-
-        return roomMapper.map(roomRepository.save(roomFound));
+        RoomEntity updatedRoom = roomRepository.save(updateRoom);
+        return roomMapper.map(updatedRoom);
     }
 }

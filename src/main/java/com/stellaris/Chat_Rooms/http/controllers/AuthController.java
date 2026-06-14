@@ -1,8 +1,8 @@
 package com.stellaris.Chat_Rooms.http.controllers;
 
-import com.stellaris.Chat_Rooms.business.user.CreateNewUserService;
-import com.stellaris.Chat_Rooms.business.user.LoginUserService;
-import com.stellaris.Chat_Rooms.business.user.LogoutUserService;
+import com.stellaris.Chat_Rooms.business.useCases.user.CreateNewUserService;
+import com.stellaris.Chat_Rooms.business.useCases.user.LoginUserService;
+import com.stellaris.Chat_Rooms.business.useCases.user.LogoutUserService;
 import com.stellaris.Chat_Rooms.http.dto.request.user.CreateUserRequestDTO;
 import com.stellaris.Chat_Rooms.http.dto.request.user.LoginUserRequestDTO;
 import com.stellaris.Chat_Rooms.http.dto.response.user.UserTokenResponseDTO;

@@ -1,6 +1,6 @@
 package com.stellaris.Chat_Rooms.http.controllers;
 
-import com.stellaris.Chat_Rooms.business.room.*;
+import com.stellaris.Chat_Rooms.business.useCases.room.*;
 import com.stellaris.Chat_Rooms.http.dto.request.room.UpdateRoomRequestDTO;
 import com.stellaris.Chat_Rooms.http.dto.request.room.CreateRoomRequestDTO;
 import com.stellaris.Chat_Rooms.http.dto.response.room.RoomResponseDTO;

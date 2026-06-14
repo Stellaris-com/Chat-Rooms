@@ -1,6 +1,6 @@
 package com.stellaris.Chat_Rooms.http.controllers;
 
-import com.stellaris.Chat_Rooms.business.notification.ListNotificationsService;
+import com.stellaris.Chat_Rooms.business.useCases.notification.ListNotificationsService;
 import com.stellaris.Chat_Rooms.http.dto.response.notification.NotificationResponseDTO;
 import com.stellaris.Chat_Rooms.persistence.entities.UserEntity;
 import lombok.RequiredArgsConstructor;

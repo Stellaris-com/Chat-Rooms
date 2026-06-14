@@ -1,4 +1,4 @@
-package com.stellaris.Chat_Rooms.business.user;
+package com.stellaris.Chat_Rooms.business.helpers.user;
 
 import com.stellaris.Chat_Rooms.persistence.entities.UserEntity;
 import com.stellaris.Chat_Rooms.persistence.repositories.UserRepository;

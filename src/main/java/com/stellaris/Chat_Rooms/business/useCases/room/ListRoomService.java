@@ -1,7 +1,6 @@
-package com.stellaris.Chat_Rooms.business.room;
+package com.stellaris.Chat_Rooms.business.useCases.room;
 
-import com.stellaris.Chat_Rooms.http.dto.response.room.SimpleRoomResponseDTO;
-import com.stellaris.Chat_Rooms.persistence.entities.UserEntity;
+import com.stellaris.Chat_Rooms.http.dto.response.room.RoomResponseDTO;
 import com.stellaris.Chat_Rooms.persistence.mappers.RoomMapper;
 import com.stellaris.Chat_Rooms.persistence.repositories.RoomRepository;
 import lombok.RequiredArgsConstructor;
@@ -11,14 +10,14 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ListMyRoomService {
+public class ListRoomService {
     private final RoomRepository roomRepository;
     private final RoomMapper roomMapper;
 
-    public List<SimpleRoomResponseDTO> listMyRooms(UserEntity currentUser) {
-        return roomRepository.findAllByUserId(currentUser.getId())
+    public List<RoomResponseDTO> list() {
+        return roomRepository.findAll()
                 .stream()
-                .map(roomMapper::mapToSimple)
+                .map(roomMapper::map)
                 .toList();
     }
 }

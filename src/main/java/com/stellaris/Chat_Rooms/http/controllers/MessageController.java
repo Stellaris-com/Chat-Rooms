@@ -1,7 +1,7 @@
 package com.stellaris.Chat_Rooms.http.controllers;
 
-import com.stellaris.Chat_Rooms.business.message.ListMessagesOfRoom;
-import com.stellaris.Chat_Rooms.business.message.SendMessageService;
+import com.stellaris.Chat_Rooms.business.useCases.message.ListMessagesOfRoom;
+import com.stellaris.Chat_Rooms.business.useCases.message.SendMessageService;
 import com.stellaris.Chat_Rooms.http.dto.request.message.SendMessageRequestDTO;
 import com.stellaris.Chat_Rooms.http.dto.response.message.MessageResponseDTO;
 import com.stellaris.Chat_Rooms.persistence.entities.UserEntity;

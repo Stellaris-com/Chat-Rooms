@@ -1,6 +1,6 @@
-package com.stellaris.Chat_Rooms.business.room;
+package com.stellaris.Chat_Rooms.business.useCases.room;
 
-import com.stellaris.Chat_Rooms.business.user.IncreaseUserRoomsCreatedService;
+import com.stellaris.Chat_Rooms.business.helpers.user.IncreaseUserRoomsCreatedService;
 import com.stellaris.Chat_Rooms.http.dto.request.room.CreateRoomRequestDTO;
 import com.stellaris.Chat_Rooms.http.dto.response.room.RoomResponseDTO;
 import com.stellaris.Chat_Rooms.persistence.entities.MembersOfRoomEntity;

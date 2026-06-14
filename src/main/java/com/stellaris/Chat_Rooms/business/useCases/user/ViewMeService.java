@@ -1,4 +1,4 @@
-package com.stellaris.Chat_Rooms.business.user;
+package com.stellaris.Chat_Rooms.business.useCases.user;
 
 import com.stellaris.Chat_Rooms.http.dto.response.user.UserResponseDTO;
 import com.stellaris.Chat_Rooms.persistence.entities.UserEntity;
