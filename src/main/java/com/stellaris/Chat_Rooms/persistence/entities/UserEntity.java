@@ -40,6 +40,14 @@ public class UserEntity implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role = Role.MEMBER;
 
+    public void increaseRoomsCreated() {
+        this.roomsCreated++;
+    }
+
+    public void increaseMessagingSend() {
+        this.messages++;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("ROLE_" + role));

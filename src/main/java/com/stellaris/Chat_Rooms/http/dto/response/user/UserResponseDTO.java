@@ -4,7 +4,7 @@ import com.stellaris.Chat_Rooms.domain.enums.Role;
 
 import java.util.UUID;
 
-public record UserResponse(
+public record UserResponseDTO(
         UUID id,
         String username,
         Long messages,

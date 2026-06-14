@@ -1,7 +1,7 @@
 package com.stellaris.Chat_Rooms.http.controllers;
 
 import com.stellaris.Chat_Rooms.business.user.ViewMeService;
-import com.stellaris.Chat_Rooms.http.dto.response.user.UserResponse;
+import com.stellaris.Chat_Rooms.http.dto.response.user.UserResponseDTO;
 import com.stellaris.Chat_Rooms.persistence.entities.UserEntity;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +17,7 @@ public class UserController {
     private final ViewMeService viewMeService;
 
     @GetMapping("/me")
-    public ResponseEntity<UserResponse> viewMe(@AuthenticationPrincipal UserEntity currentUser) {
+    public ResponseEntity<UserResponseDTO> viewMe(@AuthenticationPrincipal UserEntity currentUser) {
         return ResponseEntity.ok(viewMeService.viewMe(currentUser));
     }
 }

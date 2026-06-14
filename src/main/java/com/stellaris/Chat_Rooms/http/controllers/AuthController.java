@@ -5,7 +5,7 @@ import com.stellaris.Chat_Rooms.business.user.LoginUserService;
 import com.stellaris.Chat_Rooms.business.user.LogoutUserService;
 import com.stellaris.Chat_Rooms.http.dto.request.user.CreateUserRequestDTO;
 import com.stellaris.Chat_Rooms.http.dto.request.user.LoginUserRequestDTO;
-import com.stellaris.Chat_Rooms.http.dto.response.user.UserTokenResponse;
+import com.stellaris.Chat_Rooms.http.dto.response.user.UserTokenResponseDTO;
 import com.stellaris.Chat_Rooms.persistence.entities.UserEntity;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -23,12 +23,12 @@ public class AuthController {
     private final LogoutUserService logoutUserService;
 
     @PostMapping("/register")
-    public ResponseEntity<UserTokenResponse> register(@RequestBody @Valid CreateUserRequestDTO request) {
+    public ResponseEntity<UserTokenResponseDTO> register(@RequestBody @Valid CreateUserRequestDTO request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(createNewUserService.createNewUser(request));
     }
 
     @GetMapping("/login")
-    public ResponseEntity<UserTokenResponse> login(@RequestBody @Valid LoginUserRequestDTO request) {
+    public ResponseEntity<UserTokenResponseDTO> login(@RequestBody @Valid LoginUserRequestDTO request) {
         return ResponseEntity.ok(loginUserService.login(request));
     }
 

@@ -1,8 +1,7 @@
 package com.stellaris.Chat_Rooms.business.user;
 
 import com.stellaris.Chat_Rooms.http.dto.request.user.CreateUserRequestDTO;
-import com.stellaris.Chat_Rooms.http.dto.response.user.UserResponse;
-import com.stellaris.Chat_Rooms.http.dto.response.user.UserTokenResponse;
+import com.stellaris.Chat_Rooms.http.dto.response.user.UserTokenResponseDTO;
 import com.stellaris.Chat_Rooms.persistence.entities.UserEntity;
 import com.stellaris.Chat_Rooms.persistence.mappers.UserMapper;
 import com.stellaris.Chat_Rooms.persistence.repositories.UserRepository;
@@ -21,11 +20,11 @@ public class CreateNewUserService {
     private final PasswordEncoder passwordEncoder;
 
     @Transactional
-    public UserTokenResponse createNewUser(CreateUserRequestDTO request) {
+    public UserTokenResponseDTO createNewUser(CreateUserRequestDTO request) {
         UserEntity userToRegister = userMapper.map(request);
         userToRegister.setPassword(passwordEncoder.encode(userToRegister.getPassword()));
 
         UserEntity userRegistered = userRepository.save(userToRegister);
-        return new UserTokenResponse(tokenService.generateAccessToken(userRegistered));
+        return new UserTokenResponseDTO(tokenService.generateAccessToken(userRegistered));
     }
 }
