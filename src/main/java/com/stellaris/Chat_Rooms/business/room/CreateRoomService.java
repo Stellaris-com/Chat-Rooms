@@ -26,6 +26,7 @@ public class CreateRoomService {
         RoomEntity createRoom = roomMapper.map(request);
         createRoom.setMembersOfRoom(new ArrayList<>());
         createRoom.getMembersOfRoom().add(MembersOfRoomEntity.buildMemberOwner(currentUser, createRoom));
+        createRoom.setSimpleDescription("Criada por " + currentUser.getUsername());
 
         RoomEntity createdRoom = roomRepository.save(createRoom);
 

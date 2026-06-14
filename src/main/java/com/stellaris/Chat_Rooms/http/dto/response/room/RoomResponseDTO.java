@@ -6,6 +6,7 @@ import java.util.UUID;
 public record RoomResponseDTO(
         UUID id,
         String name,
+        String simpleDescription,
         List<RoomUserResponseDTO> membersOfRoom
 ) {
 }
