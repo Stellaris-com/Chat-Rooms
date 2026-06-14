@@ -1,5 +1,6 @@
 package com.stellaris.Chat_Rooms.business.room;
 
+import com.stellaris.Chat_Rooms.business.user.IncreaseUserRoomsCreatedService;
 import com.stellaris.Chat_Rooms.http.dto.request.room.CreateRoomRequestDTO;
 import com.stellaris.Chat_Rooms.http.dto.response.room.RoomResponseDTO;
 import com.stellaris.Chat_Rooms.persistence.entities.MembersOfRoomEntity;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 @Service
 @RequiredArgsConstructor
 public class CreateRoomService {
+    private final IncreaseUserRoomsCreatedService increaseUserRoomsCreatedService;
     private final RoomRepository roomRepository;
     private final UserRepository userRepository;
     private final RoomMapper roomMapper;
@@ -30,8 +32,7 @@ public class CreateRoomService {
 
         RoomEntity createdRoom = roomRepository.save(createRoom);
 
-        currentUser.increaseRoomsCreated();
-        userRepository.save(currentUser);
+        increaseUserRoomsCreatedService.increaseRoomsCreated(currentUser);
 
         return roomMapper.map(createRoom);
     }
