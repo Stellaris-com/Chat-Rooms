@@ -1,6 +1,7 @@
 package com.stellaris.Chat_Rooms.business.message;
 
 import com.stellaris.Chat_Rooms.http.dto.request.message.SendMessageRequestDTO;
+import com.stellaris.Chat_Rooms.http.dto.response.message.MessageResponseDTO;
 import com.stellaris.Chat_Rooms.http.exceptions.RoomNotFoundException;
 import com.stellaris.Chat_Rooms.persistence.entities.MessageEntity;
 import com.stellaris.Chat_Rooms.persistence.entities.RoomEntity;
@@ -21,7 +22,7 @@ public class SendMessageService {
     private final RoomRepository roomRepository;
     private final MessageMapper messageMapper;
 
-    public void send(UserEntity currentUser, UUID roomId, @Valid SendMessageRequestDTO request) {
+    public MessageResponseDTO send(UserEntity currentUser, UUID roomId, @Valid SendMessageRequestDTO request) {
         MessageEntity preSendMessage = messageMapper.map(request);
         preSendMessage.setUser(currentUser);
 
@@ -30,6 +31,6 @@ public class SendMessageService {
 
         preSendMessage.setRoom(roomFound);
 
-        messageRepository.save(preSendMessage);
+        return messageMapper.map(messageRepository.save(preSendMessage));
     }
 }
