@@ -25,11 +25,11 @@ public class MembersOfRoomEntity {
     private UUID id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private UserEntity user;
 
     @ManyToOne
-    @JoinColumn(name = "room_id")
+    @JoinColumn(name = "room_id", nullable = false)
     private RoomEntity room;
 
     @Column(name = "type_of_member")

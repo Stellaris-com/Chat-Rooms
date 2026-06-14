@@ -6,8 +6,8 @@ import com.stellaris.Chat_Rooms.persistence.entities.MembersOfRoomEntity;
 import com.stellaris.Chat_Rooms.persistence.entities.RoomEntity;
 import com.stellaris.Chat_Rooms.persistence.entities.UserEntity;
 import com.stellaris.Chat_Rooms.persistence.mappers.RoomMapper;
-import com.stellaris.Chat_Rooms.persistence.repositories.MembersOfRoomRepository;
 import com.stellaris.Chat_Rooms.persistence.repositories.RoomRepository;
+import com.stellaris.Chat_Rooms.persistence.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +18,7 @@ import java.util.ArrayList;
 @RequiredArgsConstructor
 public class CreateRoomService {
     private final RoomRepository roomRepository;
-    private final MembersOfRoomRepository membersOfRoomRepository;
+    private final UserRepository userRepository;
     private final RoomMapper roomMapper;
 
     @Transactional
@@ -28,6 +28,10 @@ public class CreateRoomService {
         createRoom.getMembersOfRoom().add(MembersOfRoomEntity.buildMemberOwner(currentUser, createRoom));
 
         RoomEntity createdRoom = roomRepository.save(createRoom);
+
+        currentUser.increaseRoomsCreated();
+        userRepository.save(currentUser);
+
         return roomMapper.map(createRoom);
     }
 }

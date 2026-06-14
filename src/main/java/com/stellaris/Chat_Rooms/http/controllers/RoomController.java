@@ -1,9 +1,6 @@
 package com.stellaris.Chat_Rooms.http.controllers;
 
-import com.stellaris.Chat_Rooms.business.room.CreateRoomService;
-import com.stellaris.Chat_Rooms.business.room.FetchRoomService;
-import com.stellaris.Chat_Rooms.business.room.ListRoomService;
-import com.stellaris.Chat_Rooms.business.room.UpdateRoomService;
+import com.stellaris.Chat_Rooms.business.room.*;
 import com.stellaris.Chat_Rooms.http.dto.request.room.UpdateRoomRequestDTO;
 import com.stellaris.Chat_Rooms.http.dto.request.room.CreateRoomRequestDTO;
 import com.stellaris.Chat_Rooms.http.dto.response.room.RoomResponseDTO;
@@ -25,6 +22,7 @@ public class RoomController {
     private final ListRoomService listRoomService;
     private final UpdateRoomService updateRoomService;
     private final FetchRoomService fetchRoomService;
+    private final EnterInRoomService enterInRoomService;
 
     @PostMapping
     public ResponseEntity<RoomResponseDTO> createRoom(
@@ -32,6 +30,14 @@ public class RoomController {
             @RequestBody @Valid CreateRoomRequestDTO request
     ) {
         return ResponseEntity.ok(createRoomService.create(currentUser, request));
+    }
+
+    @PostMapping("/{roomId}/enter")
+    ResponseEntity<RoomResponseDTO> enterInRoom(
+            @PathVariable UUID roomId,
+            @AuthenticationPrincipal UserEntity currentUser
+    ) {
+        return ResponseEntity.ok(enterInRoomService.enter(currentUser, roomId));
     }
 
     @GetMapping

@@ -20,6 +20,6 @@ public class RoomEntity {
 
     private String name;
 
-    @OneToMany(mappedBy = "room", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
     private List<MembersOfRoomEntity> membersOfRoom;
 }
