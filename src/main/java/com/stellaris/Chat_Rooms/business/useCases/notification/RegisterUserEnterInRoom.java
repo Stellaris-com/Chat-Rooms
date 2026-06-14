@@ -17,8 +17,7 @@ public class RegisterUserEnterInRoom {
     private final FindRoomByUserHelper findRoomByUserHelper;
     private final RegisterNotificationHelper registerNotificationHelper;
 
-    public void userEnterInRoom(UserEntity currentUser, UUID roomId) {
-        RoomEntity roomFound = findRoomByUserHelper.findByUser(currentUser, roomId);
-        registerNotificationHelper.register(roomFound, currentUser.getUsername() + "entrou na sala " + roomFound.getName());
+    public void userEnterInRoom(UserEntity currentUser, RoomEntity room) {
+        registerNotificationHelper.register(room, currentUser.getUsername() + "entrou na sala " + room.getName());
     }
 }

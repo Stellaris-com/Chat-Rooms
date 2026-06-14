@@ -17,7 +17,7 @@ import java.util.UUID;
 public class NotificationEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "room_id")
+    @Column(name = "notification_id")
     private UUID id;
 
     private String message;
