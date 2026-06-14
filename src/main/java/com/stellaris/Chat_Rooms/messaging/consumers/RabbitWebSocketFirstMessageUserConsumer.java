@@ -15,7 +15,8 @@ public class RabbitWebSocketFirstMessageUserConsumer {
     private final FindMessageHelper findMessageHelper;
 
     @RabbitListener(queues = "${rabbitmq.web-socket.messages.queue}")
-    public void handlerFirstMessage(SendMessageEvent event) {
+    public void handlerSendMessage(SendMessageEvent event) throws InterruptedException {
+        Thread.sleep(5000);
         MessageEntity messageFound = findMessageHelper.find(event.messageId());
         sendUserMessageWebSocketService.sendMessage(messageFound);
     }

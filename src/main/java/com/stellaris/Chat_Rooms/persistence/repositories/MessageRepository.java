@@ -13,8 +13,9 @@ import java.util.UUID;
 public interface MessageRepository extends JpaRepository<MessageEntity, UUID> {
     @Query("""
         SELECT m FROM MessageEntity m
-        INNER JOIN m.user u
         INNER JOIN m.room r
+        INNER JOIN r.membersOfRoom mr
+        INNER JOIN mr.user u
         WHERE u.id = :userId
         AND r.id = :roomId
         ORDER BY m.createdAt
