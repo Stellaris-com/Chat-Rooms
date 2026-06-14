@@ -20,4 +20,13 @@ public interface MessageRepository extends JpaRepository<MessageEntity, UUID> {
         ORDER BY m.createdAt DESC
     """)
     List<MessageEntity> findAllByRoomIdAndUserId(@Param("roomId") UUID roomId, @Param("userId") UUID userId);
+
+    @Query("""
+        SELECT COUNT(m) FROM MessageEntity m
+        INNER JOIN m.user u
+        INNER JOIN m.room r
+        WHERE u.id = :userId
+        AND r.id = :roomId
+    """)
+    int countMessagesByUserIdAndRoomId(@Param("userId") UUID userId, @Param("roomId") UUID roomId);
 }
