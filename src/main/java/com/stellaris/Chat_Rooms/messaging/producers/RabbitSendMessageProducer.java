@@ -1,6 +1,7 @@
 package com.stellaris.Chat_Rooms.messaging.producers;
 
 import com.stellaris.Chat_Rooms.messaging.dto.SendMessageEvent;
+import com.stellaris.Chat_Rooms.persistence.entities.MessageEntity;
 import com.stellaris.Chat_Rooms.persistence.entities.RoomEntity;
 import com.stellaris.Chat_Rooms.persistence.entities.UserEntity;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +20,7 @@ public class RabbitSendMessageProducer {
 
     private final RabbitTemplate rabbitTemplate;
 
-    public void sendMessageEvent(UserEntity user, RoomEntity room) {
-        rabbitTemplate.convertAndSend(chatExchange, sendMessageRoutingKey, new SendMessageEvent(user.getId(), room.getId()));
+    public void sendMessageEvent(UserEntity user, RoomEntity room, MessageEntity message) {
+        rabbitTemplate.convertAndSend(chatExchange, sendMessageRoutingKey, new SendMessageEvent(user.getId(), room.getId(), message.getId()));
     }
 }

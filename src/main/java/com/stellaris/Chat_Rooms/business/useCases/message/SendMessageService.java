@@ -35,7 +35,7 @@ public class SendMessageService {
 
         MessageEntity saved = messageRepository.save(preSendMessage);
 
-        rabbitSendMessageProducer.sendMessageEvent(currentUser, roomFound);
+        rabbitSendMessageProducer.sendMessageEvent(currentUser, roomFound, saved);
         return messageMapper.map(saved);
     }
 }

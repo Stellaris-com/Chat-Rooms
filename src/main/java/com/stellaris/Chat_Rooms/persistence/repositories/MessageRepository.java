@@ -17,7 +17,7 @@ public interface MessageRepository extends JpaRepository<MessageEntity, UUID> {
         INNER JOIN m.room r
         WHERE u.id = :userId
         AND r.id = :roomId
-        ORDER BY m.createdAt DESC
+        ORDER BY m.createdAt
     """)
     List<MessageEntity> findAllByRoomIdAndUserId(@Param("roomId") UUID roomId, @Param("userId") UUID userId);
 

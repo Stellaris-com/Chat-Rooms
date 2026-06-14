@@ -29,6 +29,9 @@ public class AuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String authorization = request.getHeader(HttpHeaders.AUTHORIZATION);
 
+        System.out.println("URI: " + request.getRequestURI());
+        System.out.println("AUTH: " + authorization);
+
         if (authorization == null || !authorization.startsWith("Bearer ")) {
             filterChain.doFilter(request, response);
             return;
