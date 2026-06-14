@@ -1,11 +1,13 @@
 package com.stellaris.Chat_Rooms.persistence.repositories;
 
+import com.stellaris.Chat_Rooms.http.dto.response.room.RoomResponseDTO;
 import com.stellaris.Chat_Rooms.persistence.entities.RoomEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -29,4 +31,13 @@ public interface RoomRepository extends JpaRepository<RoomEntity, UUID> {
         AND u.id = :userId
     """)
     Optional<RoomEntity> findByUserIdAndRoomId(@Param("userId") UUID userId, @Param("roomId") UUID roomId);
+
+    @Query("""
+        SELECT r FROM RoomEntity r
+        INNER JOIN r.membersOfRoom m
+        INNER JOIN m.user u
+        WHERE u.id = :userId
+        ORDER BY m.createdAt DESC
+    """)
+    List<RoomEntity> findAllByUserId(@Param("userId") UUID userId);
 }

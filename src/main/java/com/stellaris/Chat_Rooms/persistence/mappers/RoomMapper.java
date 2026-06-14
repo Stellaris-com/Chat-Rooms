@@ -3,6 +3,7 @@ package com.stellaris.Chat_Rooms.persistence.mappers;
 import com.stellaris.Chat_Rooms.http.dto.request.room.CreateRoomRequestDTO;
 import com.stellaris.Chat_Rooms.http.dto.response.room.RoomResponseDTO;
 import com.stellaris.Chat_Rooms.http.dto.response.room.RoomUserResponseDTO;
+import com.stellaris.Chat_Rooms.http.dto.response.room.SimpleRoomResponseDTO;
 import com.stellaris.Chat_Rooms.persistence.entities.MembersOfRoomEntity;
 import com.stellaris.Chat_Rooms.persistence.entities.RoomEntity;
 import com.stellaris.Chat_Rooms.persistence.entities.UserEntity;
@@ -17,6 +18,8 @@ public interface RoomMapper {
 
     @Mapping(target = "membersOfRoom", expression = "java(membersOfRoomToResponse(entity.getMembersOfRoom()))")
     RoomResponseDTO map(RoomEntity entity);
+
+    SimpleRoomResponseDTO mapToSimple(RoomEntity entity);
 
     default List<RoomUserResponseDTO> membersOfRoomToResponse(List<MembersOfRoomEntity> membersOfRoomEntity) {
         return membersOfRoomEntity.stream()

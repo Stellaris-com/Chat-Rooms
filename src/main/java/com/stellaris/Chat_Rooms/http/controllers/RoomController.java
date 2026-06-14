@@ -4,6 +4,7 @@ import com.stellaris.Chat_Rooms.business.room.*;
 import com.stellaris.Chat_Rooms.http.dto.request.room.UpdateRoomRequestDTO;
 import com.stellaris.Chat_Rooms.http.dto.request.room.CreateRoomRequestDTO;
 import com.stellaris.Chat_Rooms.http.dto.response.room.RoomResponseDTO;
+import com.stellaris.Chat_Rooms.http.dto.response.room.SimpleRoomResponseDTO;
 import com.stellaris.Chat_Rooms.persistence.entities.UserEntity;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,7 @@ import java.util.UUID;
 public class RoomController {
     private final CreateRoomService createRoomService;
     private final ListRoomService listRoomService;
+    private final ListMyRoomService listMyRoomService;
     private final UpdateRoomService updateRoomService;
     private final FetchRoomService fetchRoomService;
     private final EnterInRoomService enterInRoomService;
@@ -44,6 +46,13 @@ public class RoomController {
     @GetMapping
     public ResponseEntity<List<RoomResponseDTO>> listRooms() {
         return ResponseEntity.ok(listRoomService.list());
+    }
+
+    @GetMapping("/my")
+    public ResponseEntity<List<SimpleRoomResponseDTO>> listMyRooms(
+            @AuthenticationPrincipal UserEntity currentUser
+    ) {
+        return ResponseEntity.ok(listMyRoomService.listMyRooms(currentUser));
     }
 
     @GetMapping("/{roomId}")
