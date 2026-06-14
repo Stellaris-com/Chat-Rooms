@@ -33,7 +33,13 @@ public class TokenService {
                 .expiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .signWith(privateKey)
                 .compact();
-        tokenRepository.save(new TokenEntity(null, saved, token));
+
+        tokenRepository.findByUserId(saved.getId())
+                .map(tokenFound -> {
+                    tokenFound.setToken(token);
+                    return tokenRepository.save(tokenFound);
+                })
+                .orElseGet(() -> tokenRepository.save(new TokenEntity(null, saved, token)));
         return token;
     }
 

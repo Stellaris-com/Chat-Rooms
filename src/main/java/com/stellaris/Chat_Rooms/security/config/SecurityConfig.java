@@ -38,6 +38,7 @@ public class SecurityConfig {
                     request -> request
 
                             .requestMatchers("/auth/register").permitAll()
+                            .requestMatchers("/auth/login").permitAll()
                 )
                 .build();
     }
