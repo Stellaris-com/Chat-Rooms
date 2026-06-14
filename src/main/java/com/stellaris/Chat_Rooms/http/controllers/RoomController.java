@@ -23,6 +23,7 @@ public class RoomController {
     private final UpdateRoomService updateRoomService;
     private final FetchRoomService fetchRoomService;
     private final EnterInRoomService enterInRoomService;
+    private final ExitRoomService exitRoomService;
 
     @PostMapping
     public ResponseEntity<RoomResponseDTO> createRoom(
@@ -57,5 +58,14 @@ public class RoomController {
             @PathVariable UUID roomId
             ) {
         return ResponseEntity.ok(updateRoomService.update(currentUser, request, roomId));
+    }
+
+    @DeleteMapping("/{roomId}/exit")
+    public ResponseEntity<Void> exitRoom(
+            @AuthenticationPrincipal UserEntity currentUser,
+            @PathVariable UUID roomId
+    ) {
+        exitRoomService.exit(currentUser, roomId);
+        return ResponseEntity.ok().build();
     }
 }

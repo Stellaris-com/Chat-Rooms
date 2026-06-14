@@ -3,7 +3,9 @@ package com.stellaris.Chat_Rooms.persistence.entities;
 import com.stellaris.Chat_Rooms.domain.enums.TypeOfMember;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -35,6 +37,11 @@ public class MembersOfRoomEntity {
     @Column(name = "type_of_member")
     @Enumerated(EnumType.STRING)
     private TypeOfMember typeOfMember = TypeOfMember.PARTICIPANT;
+
+    @Builder.Default
+    @CreationTimestamp
+    @Column(name = "created_at")
+    private LocalDateTime createdAt = LocalDateTime.now();
 
     public static MembersOfRoomEntity buildMemberParticipant(UserEntity currentUser, RoomEntity room) {
         return buildMember(currentUser, room, TypeOfMember.PARTICIPANT);

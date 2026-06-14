@@ -23,6 +23,6 @@ public class RoomEntity {
     @Column(name = "simple_description")
     private String simpleDescription;
 
-    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<MembersOfRoomEntity> membersOfRoom;
 }
