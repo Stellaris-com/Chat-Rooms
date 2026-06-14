@@ -1,6 +1,6 @@
 package com.stellaris.Chat_Rooms.persistence.mappers;
 
-import com.stellaris.Chat_Rooms.http.dto.response.room.CreateRoomRequestDTO;
+import com.stellaris.Chat_Rooms.http.dto.request.room.CreateRoomRequestDTO;
 import com.stellaris.Chat_Rooms.http.dto.response.room.RoomResponseDTO;
 import com.stellaris.Chat_Rooms.http.dto.response.room.RoomUserResponseDTO;
 import com.stellaris.Chat_Rooms.persistence.entities.MembersOfRoomEntity;

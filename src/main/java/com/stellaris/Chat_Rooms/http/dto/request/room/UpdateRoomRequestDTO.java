@@ -1,8 +1,8 @@
-package com.stellaris.Chat_Rooms.http.dto.response.room;
+package com.stellaris.Chat_Rooms.http.dto.request.room;
 
 import jakarta.validation.constraints.NotBlank;
 
-public record CreateRoomRequestDTO(
+public record UpdateRoomRequestDTO(
         @NotBlank(message = "name é obrigatório")
         String name
 ) {
