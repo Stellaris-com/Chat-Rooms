@@ -1,7 +1,6 @@
 package com.stellaris.Chat_Rooms.business.useCases.notification;
 
 import com.stellaris.Chat_Rooms.business.helpers.notification.RegisterNotificationHelper;
-import com.stellaris.Chat_Rooms.persistence.entities.NotificationRepository;
 import com.stellaris.Chat_Rooms.persistence.entities.RoomEntity;
 import com.stellaris.Chat_Rooms.persistence.entities.UserEntity;
 import com.stellaris.Chat_Rooms.persistence.repositories.MessageRepository;

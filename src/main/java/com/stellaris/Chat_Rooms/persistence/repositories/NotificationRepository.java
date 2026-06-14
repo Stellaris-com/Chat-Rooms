@@ -1,5 +1,6 @@
-package com.stellaris.Chat_Rooms.persistence.entities;
+package com.stellaris.Chat_Rooms.persistence.repositories;
 
+import com.stellaris.Chat_Rooms.persistence.entities.NotificationEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
