@@ -12,6 +12,6 @@ public class RegisterUserExitRoom {
     private final RegisterNotificationHelper registerNotificationHelper;
 
     public void userExitRoom(UserEntity currentUser, RoomEntity room) {
-        registerNotificationHelper.register(room, currentUser.getUsername() + "saiu da sala " + room.getName());
+        registerNotificationHelper.register(room, currentUser.getUsername() + " saiu da sala " + room.getName());
     }
 }

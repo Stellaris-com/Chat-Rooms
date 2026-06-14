@@ -18,6 +18,6 @@ public class RegisterUserEnterInRoom {
     private final RegisterNotificationHelper registerNotificationHelper;
 
     public void userEnterInRoom(UserEntity currentUser, RoomEntity room) {
-        registerNotificationHelper.register(room, currentUser.getUsername() + "entrou na sala " + room.getName());
+        registerNotificationHelper.register(room, currentUser.getUsername() + " entrou na sala " + room.getName());
     }
 }

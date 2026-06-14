@@ -2,6 +2,7 @@ package com.stellaris.Chat_Rooms.business.useCases.room;
 
 import com.stellaris.Chat_Rooms.http.dto.response.room.RoomResponseDTO;
 import com.stellaris.Chat_Rooms.http.exceptions.RoomNotFoundException;
+import com.stellaris.Chat_Rooms.messaging.producers.RabbitUserEnterRoomProducer;
 import com.stellaris.Chat_Rooms.persistence.entities.MembersOfRoomEntity;
 import com.stellaris.Chat_Rooms.persistence.entities.RoomEntity;
 import com.stellaris.Chat_Rooms.persistence.entities.UserEntity;
@@ -15,6 +16,7 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class EnterInRoomService {
+    private final RabbitUserEnterRoomProducer rabbitUserEnterRoomProducer;
     private final RoomRepository roomRepository;
     private final RoomMapper roomMapper;
 
@@ -24,6 +26,9 @@ public class EnterInRoomService {
 
         roomFound.getMembersOfRoom().add(MembersOfRoomEntity.buildMemberParticipant(user, roomFound));
 
-        return roomMapper.map(roomRepository.save(roomFound));
+        RoomEntity saved = roomRepository.save(roomFound);
+
+        rabbitUserEnterRoomProducer.userEnterRoomEvent(user, saved);
+        return roomMapper.map(saved);
     }
 }

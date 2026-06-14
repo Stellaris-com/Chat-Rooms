@@ -19,11 +19,11 @@ public class RegisterFirstUserMessage {
     private final RoomRepository roomRepository;
 
     public void registerFirstUserMessage(UserEntity currentUser, RoomEntity room) {
-        if (this.userIsSendMessages(currentUser.getId(), room.getId())) return;
+        if (this.userHaveMoreOneMessage(currentUser.getId(), room.getId())) return;
 
         registerNotificationHelper.register(room, currentUser.getUsername() + " enviou sua primeira mensagem para sala " + room.getName());
     }
-    private boolean userIsSendMessages(UUID userId, UUID roomId) {
-        return messageRepository.countMessagesByUserIdAndRoomId(userId, roomId) > 0;
+    private boolean userHaveMoreOneMessage(UUID userId, UUID roomId) {
+        return messageRepository.countMessagesByUserIdAndRoomId(userId, roomId) > 1;
     }
 }

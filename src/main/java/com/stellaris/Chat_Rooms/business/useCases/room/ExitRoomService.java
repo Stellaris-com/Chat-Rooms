@@ -2,6 +2,7 @@ package com.stellaris.Chat_Rooms.business.useCases.room;
 
 import com.stellaris.Chat_Rooms.domain.enums.TypeOfMember;
 import com.stellaris.Chat_Rooms.http.exceptions.RoomNotFoundException;
+import com.stellaris.Chat_Rooms.messaging.producers.RabbitUserExitRoomProducer;
 import com.stellaris.Chat_Rooms.persistence.entities.RoomEntity;
 import com.stellaris.Chat_Rooms.persistence.entities.UserEntity;
 import com.stellaris.Chat_Rooms.persistence.mappers.RoomMapper;
@@ -16,8 +17,8 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class ExitRoomService {
+    private final RabbitUserExitRoomProducer rabbitUserExitRoomProducer;
     private final RoomRepository roomRepository;
-    private final MembersOfRoomRepository membersOfRoomRepository;
     private final RoomMapper roomMapper;
 
     @Transactional
@@ -34,6 +35,9 @@ public class ExitRoomService {
 
         else roomFound.getMembersOfRoom().getFirst().setTypeOfMember(TypeOfMember.OWNER);
 
-        roomMapper.map(roomRepository.save(roomFound));
+        RoomEntity saved = roomRepository.save(roomFound);
+
+        rabbitUserExitRoomProducer.userExitRoomEvent(currentUser, saved);
+        roomMapper.map(saved);
     }
 }

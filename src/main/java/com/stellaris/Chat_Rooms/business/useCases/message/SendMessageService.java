@@ -3,6 +3,7 @@ package com.stellaris.Chat_Rooms.business.useCases.message;
 import com.stellaris.Chat_Rooms.http.dto.request.message.SendMessageRequestDTO;
 import com.stellaris.Chat_Rooms.http.dto.response.message.MessageResponseDTO;
 import com.stellaris.Chat_Rooms.http.exceptions.RoomNotFoundException;
+import com.stellaris.Chat_Rooms.messaging.producers.RabbitSendMessageProducer;
 import com.stellaris.Chat_Rooms.persistence.entities.MessageEntity;
 import com.stellaris.Chat_Rooms.persistence.entities.RoomEntity;
 import com.stellaris.Chat_Rooms.persistence.entities.UserEntity;
@@ -18,6 +19,7 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 public class SendMessageService {
+    private final RabbitSendMessageProducer rabbitSendMessageProducer;
     private final MessageRepository messageRepository;
     private final RoomRepository roomRepository;
     private final MessageMapper messageMapper;
@@ -31,6 +33,9 @@ public class SendMessageService {
 
         preSendMessage.setRoom(roomFound);
 
-        return messageMapper.map(messageRepository.save(preSendMessage));
+        MessageEntity saved = messageRepository.save(preSendMessage);
+
+        rabbitSendMessageProducer.sendMessageEvent(currentUser, roomFound);
+        return messageMapper.map(saved);
     }
 }
