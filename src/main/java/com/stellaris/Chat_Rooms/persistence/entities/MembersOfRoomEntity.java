@@ -38,11 +38,6 @@ public class MembersOfRoomEntity {
     @Enumerated(EnumType.STRING)
     private TypeOfMember typeOfMember = TypeOfMember.PARTICIPANT;
 
-    @Builder.Default
-    @CreationTimestamp
-    @Column(name = "created_at")
-    private LocalDateTime createdAt = LocalDateTime.now();
-
     public static MembersOfRoomEntity buildMemberParticipant(UserEntity currentUser, RoomEntity room) {
         return buildMember(currentUser, room, TypeOfMember.PARTICIPANT);
     }

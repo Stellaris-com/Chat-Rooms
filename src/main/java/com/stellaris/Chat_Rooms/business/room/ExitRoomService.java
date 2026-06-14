@@ -20,7 +20,6 @@ public class ExitRoomService {
     private final MembersOfRoomRepository membersOfRoomRepository;
     private final RoomMapper roomMapper;
 
-
     @Transactional
     public void exit(UserEntity currentUser, UUID roomId) {
         RoomEntity roomFound = roomRepository.findByUserIdAndRoomId(currentUser.getId(), roomId)
