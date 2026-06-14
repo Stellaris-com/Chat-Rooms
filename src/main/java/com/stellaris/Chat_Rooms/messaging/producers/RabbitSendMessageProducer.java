@@ -20,6 +20,6 @@ public class RabbitSendMessageProducer {
     private final RabbitTemplate rabbitTemplate;
 
     public void sendMessageEvent(UserEntity user, RoomEntity room) {
-        rabbitTemplate.convertAndSend(chatExchange, sendMessageRoutingKey, new SendMessageEvent(user, room));
+        rabbitTemplate.convertAndSend(chatExchange, sendMessageRoutingKey, new SendMessageEvent(user.getId(), room.getId()));
     }
 }

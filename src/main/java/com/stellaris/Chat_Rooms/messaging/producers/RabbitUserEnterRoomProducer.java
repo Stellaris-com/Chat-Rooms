@@ -20,6 +20,6 @@ public class RabbitUserEnterRoomProducer {
     private String userEnterRoomRoutingKey;
 
     public void userEnterRoomEvent(UserEntity user, RoomEntity room) {
-        rabbitTemplate.convertAndSend(roomExchange, userEnterRoomRoutingKey, new UserEnterAndExitRoomEvent(user, room));
+        rabbitTemplate.convertAndSend(roomExchange, userEnterRoomRoutingKey, new UserEnterAndExitRoomEvent(user.getId(), room.getId()));
     }
 }

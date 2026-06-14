@@ -1,10 +1,9 @@
 package com.stellaris.Chat_Rooms.messaging.dto;
 
-import com.stellaris.Chat_Rooms.persistence.entities.RoomEntity;
-import com.stellaris.Chat_Rooms.persistence.entities.UserEntity;
+import java.util.UUID;
 
 public record SendMessageEvent(
-        UserEntity user,
-        RoomEntity room
+        UUID userId,
+        UUID roomId
 ) {
 }
