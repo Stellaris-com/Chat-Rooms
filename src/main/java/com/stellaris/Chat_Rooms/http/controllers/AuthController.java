@@ -27,7 +27,7 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createNewUserService.createNewUser(request));
     }
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public ResponseEntity<UserTokenResponseDTO> login(@RequestBody @Valid LoginUserRequestDTO request) {
         return ResponseEntity.ok(loginUserService.login(request));
     }
