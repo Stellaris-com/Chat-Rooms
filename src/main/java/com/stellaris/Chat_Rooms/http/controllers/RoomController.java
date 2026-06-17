@@ -49,7 +49,7 @@ public class RoomController {
     }
 
     @GetMapping("/my")
-    public ResponseEntity<List<SimpleRoomResponseDTO>> listMyRooms(
+    public ResponseEntity<List<RoomResponseDTO>> listMyRooms(
             @AuthenticationPrincipal UserEntity currentUser
     ) {
         return ResponseEntity.ok(listMyRoomService.listMyRooms(currentUser));
