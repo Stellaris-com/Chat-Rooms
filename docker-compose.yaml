@@ -3,11 +3,11 @@ services:
     image: rabbitmq:3.13-management
     container_name: chat-rabbitmq
     ports:
-      - "5672:5672"   # Porta de dados (AMQP)
+      - "5672:5672" # Porta de dados (AMQP)
       - "15672:15672" # Porta do Painel de Controle (Browser)
     environment:
-      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USER}
-      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+      RABBITMQ_DEFAULT_USER: rota-facil
+      RABBITMQ_DEFAULT_PASS: admin
     volumes:
       - chat-rabbitmq-data:/var/lib/rabbitmq
 
@@ -16,9 +16,9 @@ services:
     container_name: chat-database
 
     environment:
-      POSTGRES_DB: ${CHAT_DATASOURCE_NAME}
-      POSTGRES_USER: ${DATASOURCE_USERNAME}
-      POSTGRES_PASSWORD: ${DATASOURCE_PASSWORD}
+      POSTGRES_DB: chat_database
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: admin
 
     ports:
       - "5432:5432"
